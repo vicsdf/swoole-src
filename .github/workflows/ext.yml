@@ -11,22 +11,23 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: swoole-src
-
-#debug start
+    #debug start
     - name: debug
-      run: ls -al; \
-           ls -al ${GITHUB_WORKSPACE};
-#debug end
-
+      run: |
+           ls -al
+           ls -al ${GITHUB_WORKSPACE}
+           which phpize
+    #debug end
     - name: compile swoole-src
-      run: cd ${GITHUB_WORKSPACE}/swoole-src && \
-           phpize && \
-           ./configure \
-           --enable-sockets \
-           --enable-mysqlnd \
-           --enable-http2 \
-           --enable-debug-log && \
-           make -j
+      working-directory: ${GITHUB_WORKSPACE}/swoole-src
+      run: |
+        phpize
+        ./configure \
+        --enable-sockets \
+        --enable-mysqlnd \
+        --enable-http2 \
+        --enable-debug-log
+        make -j
 # ext-async
     - name: checkout ext-async
       uses: actions/checkout@v2
@@ -34,7 +35,8 @@ jobs:
         repository: swoole/ext-async
         path: ext-async
     - name: compile ext-async
-      run: cd ${GITHUB_WORKSPACE}/ext-async && \
-           phpize && \
-           ./configure && \
-           make -j
+      working-directory: ${GITHUB_WORKSPACE}/ext-async
+      run: |
+        phpize
+        ./configure
+        make -j
