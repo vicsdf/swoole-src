@@ -6,6 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+# php
+    - name: php info
+      run: php -v
 # swoole-src
     - name: checkout swoole
       uses: actions/checkout@v2
@@ -21,6 +24,8 @@ jobs:
         --enable-http2 \
         --enable-debug-log
         make -j
+        make install
+        php --ri swoole
 # ext-async
     - name: checkout ext-async
       uses: actions/checkout@v2
