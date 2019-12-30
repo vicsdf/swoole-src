@@ -12,14 +12,14 @@ jobs:
       with:
         path: swoole-src
     - name: compile swoole-src
-      run: cd swoole-src && \
-          phpize && \
-          ./configure \
-          --enable-sockets \
-          --enable-mysqlnd \
-          --enable-http2 \
-          --enable-debug-log && \
-          make -j
+      run: cd ${GITHUB_WORKSPACE}/swoole-src && \
+           phpize && \
+           ./configure \
+           --enable-sockets \
+           --enable-mysqlnd \
+           --enable-http2 \
+           --enable-debug-log && \
+           make -j
 # ext-async
     - name: checkout ext-async
       uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
         repository: swoole/ext-async
         path: ext-async
     - name: compile ext-async
-      run: cd ext-async && \
-        phpize && \
-        ./configure && \
-        make -j
+      run: cd ${GITHUB_WORKSPACE}/ext-async && \
+           phpize && \
+           ./configure && \
+           make -j
