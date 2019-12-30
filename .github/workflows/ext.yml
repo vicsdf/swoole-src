@@ -4,12 +4,30 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-    - name: configure
-      run: phpize && ./configure --enable-sockets --enable-mysqlnd --enable-http2 --enable-debug-log
-    - name: make
-      run: make
+# swoole-src
+    - name: checkout swoole
+      uses: actions/checkout@v1
+      with:
+        path: swoole-src
+    - name: compile swoole-src
+      run: cd swoole-src && \
+          phpize && \
+          ./configure \
+          --enable-sockets \
+          --enable-mysqlnd \
+          --enable-http2 \
+          --enable-debug-log && \
+          make -j
+# ext-async
+    - name: checkout ext-async
+      uses: actions/checkout@v2
+      with:
+        repository: swoole/ext-async
+        path: ext-async
+    - name: compile ext-async
+      run: cd ext-async && \
+        phpize && \
+        ./configure && \
+        make -j
