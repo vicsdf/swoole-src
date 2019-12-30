@@ -23,8 +23,8 @@ jobs:
         --enable-mysqlnd \
         --enable-http2 \
         --enable-debug-log
-        make -j
-        make install
+        make -j > /dev/null
+        sudo make install
         php --ri swoole
 # ext-async
     - name: checkout ext-async
@@ -37,4 +37,5 @@ jobs:
       run: |
         phpize
         ./configure
-        make -j
+        make -j > /dev/null
+        sudo make install
