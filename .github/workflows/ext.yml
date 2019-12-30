@@ -6,15 +6,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-# debug
-    - name: debug
-      run: ls -al; \
-           which phpize;
 # swoole-src
     - name: checkout swoole
       uses: actions/checkout@v2
       with:
         path: swoole-src
+
+#debug start
+    - name: debug
+      run: ls -al; \
+           ls -al ${GITHUB_WORKSPACE};
+#debug end
+
     - name: compile swoole-src
       run: cd ${GITHUB_WORKSPACE}/swoole-src && \
            phpize && \
