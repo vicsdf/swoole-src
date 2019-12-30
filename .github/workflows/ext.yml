@@ -8,7 +8,7 @@ jobs:
     steps:
 # swoole-src
     - name: checkout swoole
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       with:
         path: swoole-src
     - name: compile swoole-src
