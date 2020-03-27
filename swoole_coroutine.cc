@@ -259,10 +259,6 @@ static void coro_interrupt_resume(void *data)
     Coroutine *co = (Coroutine *) data;
     if (co && !co->is_end())
     {
-        if (SwooleTG.reactor && SwooleTG.reactor->check_timer)
-        {
-            swTimer_select(SwooleTG.reactor->timer);
-        }
         swTraceLog(SW_TRACE_COROUTINE, "interrupt_callback cid=%ld ", co->get_cid());
         co->resume();
     }
